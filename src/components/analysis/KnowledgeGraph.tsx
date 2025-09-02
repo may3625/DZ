@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Pagination } from '@/components/common/Pagination';
-import { usePagination } from '@/hooks/usePagination';
+import { StandardPagination, useStandardPagination } from '@/components/common/StandardPagination';
 import { 
   Network, 
   GitBranch, 
@@ -224,45 +223,51 @@ export function KnowledgeGraph() {
     }
   ];
 
-  // Pagination pour les nœuds
+// Pagination pour les nœuds
   const {
     currentData: paginatedNodes,
     currentPage: nodesPage,
     totalPages: nodesTotalPages,
+    itemsPerPage: nodesItemsPerPage,
+    totalItems: nodesTotalItems,
     goToPage: goToNodesPage,
     nextPage: goToNextNodesPage,
     prevPage: goToPreviousNodesPage,
-    totalItems: nodesTotalItems
-  } = usePagination({
+    setItemsPerPage: setNodesItemsPerPage
+  } = useStandardPagination({
     data: nodes,
     itemsPerPage: 5
   });
 
-  // Pagination pour les relations
+// Pagination pour les relations
   const {
     currentData: paginatedRelations,
     currentPage: relationsPage,
     totalPages: relationsTotalPages,
+    itemsPerPage: relationsItemsPerPage,
+    totalItems: relationsTotalItems,
     goToPage: goToRelationsPage,
     nextPage: goToNextRelationsPage,
     prevPage: goToPreviousRelationsPage,
-    totalItems: relationsTotalItems
-  } = usePagination({
+    setItemsPerPage: setRelationsItemsPerPage
+  } = useStandardPagination({
     data: relations,
     itemsPerPage: 5
   });
 
-  // Pagination pour l'analyse de centralité
+// Pagination pour l'analyse de centralité
   const sortedNodesByCentrality = nodes.sort((a, b) => b.connections - a.connections);
   const {
     currentData: paginatedCentralityAnalysis,
     currentPage: centralityPage,
     totalPages: centralityTotalPages,
+    itemsPerPage: centralityItemsPerPage,
+    totalItems: centralityTotalItems,
     goToPage: goToCentralityPage,
     nextPage: goToNextCentralityPage,
     prevPage: goToPreviousCentralityPage,
-    totalItems: centralityTotalItems
-  } = usePagination({
+    setItemsPerPage: setCentralityItemsPerPage
+  } = useStandardPagination({
     data: sortedNodesByCentrality,
     itemsPerPage: 5
   });
@@ -474,14 +479,14 @@ export function KnowledgeGraph() {
                     </div>
                   </div>
                 ))}
-                 <Pagination
+                 <StandardPagination
                    currentPage={nodesPage}
                    totalPages={nodesTotalPages}
                    totalItems={nodesTotalItems}
-                   itemsPerPage={5}
+                   itemsPerPage={nodesItemsPerPage}
                    onPageChange={goToNodesPage}
-                   onItemsPerPageChange={() => {}}
-                />
+                   onItemsPerPageChange={setNodesItemsPerPage}
+                 />
               </div>
             </CardContent>
           </Card>
@@ -518,13 +523,13 @@ export function KnowledgeGraph() {
                     </div>
                   );
                 })}
-                <Pagination
+                <StandardPagination
                   currentPage={relationsPage}
                   totalPages={relationsTotalPages}
                   totalItems={relationsTotalItems}
-                  itemsPerPage={4}
+                  itemsPerPage={relationsItemsPerPage}
                   onPageChange={goToRelationsPage}
-                  onItemsPerPageChange={() => {}}
+                  onItemsPerPageChange={setRelationsItemsPerPage}
                 />
               </div>
             </CardContent>
@@ -574,13 +579,13 @@ export function KnowledgeGraph() {
                       <span className="text-sm font-medium">{node.connections} connexions</span>
                     </div>
                   ))}
-                  <Pagination
+                  <StandardPagination
                     currentPage={centralityPage}
                     totalPages={centralityTotalPages}
                     totalItems={centralityTotalItems}
-                    itemsPerPage={5}
+                    itemsPerPage={centralityItemsPerPage}
                     onPageChange={goToCentralityPage}
-                    onItemsPerPageChange={() => {}}
+                    onItemsPerPageChange={setCentralityItemsPerPage}
                   />
                 </div>
               </CardContent>

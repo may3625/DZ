@@ -4,8 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Pagination } from '@/components/common/Pagination';
-import { usePagination } from '@/hooks/usePagination';
+import { StandardPagination, useStandardPagination } from '@/components/common/StandardPagination';
 import { 
   MessageSquare, 
   Star, 
@@ -168,10 +167,10 @@ export function FeedbackSection() {
     totalItems,
     setCurrentPage,
     setItemsPerPage
-  } = usePagination({
-    data: filteredFeedbacks,
-    itemsPerPage: 5
-  });
+} = useStandardPagination({
+  data: filteredFeedbacks,
+  itemsPerPage: 5
+});
 
   const getRatingStars = (rating: number) => {
     return Array.from({ length: 5 }, (_, index) => (
@@ -396,7 +395,7 @@ export function FeedbackSection() {
 
           {/* Pagination */}
           <div className="mt-6">
-            <Pagination
+            <StandardPagination
               currentPage={currentPage}
               totalPages={totalPages}
               totalItems={totalItems}
