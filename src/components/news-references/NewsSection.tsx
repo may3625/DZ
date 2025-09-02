@@ -7,6 +7,7 @@ import { Switch } from '@/components/ui/switch';
 
 import { TabFormField } from '@/components/common/TabFormField';
 import { Pagination } from '@/components/common/Pagination';
+import { UnifiedPagination } from '@/components/common/UnifiedPagination';
 import { usePagination } from '@/hooks/usePagination';
 import { InstantSearch } from '@/components/common/InstantSearch';
 import { Newspaper, Calendar, TrendingUp, Users, FileText, Settings } from 'lucide-react';
@@ -721,13 +722,17 @@ export function NewsSection() {
                     </div>
                   ))}
                 </div>
-                <Pagination
+                <UnifiedPagination
                   currentPage={analysesCurrentPage}
                   totalPages={analysesTotalPages}
                   totalItems={analysesTotalItems}
                   itemsPerPage={analysesItemsPerPage}
                   onPageChange={setAnalysesCurrentPage}
                   onItemsPerPageChange={setAnalysesItemsPerPage}
+                  size="sm"
+                  variant="compact"
+                  showItemsPerPage={false}
+                  showInfo={true}
                 />
                 <Button className="w-full">
                   Consulter toutes les analyses

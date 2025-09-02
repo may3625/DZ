@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { UnifiedPagination } from '@/components/common/UnifiedPagination';
 import { usePagination } from '@/hooks/usePagination';
-import { StandardPagination } from '@/components/common/StandardPagination';
 import { 
   Users, 
   Eye, 
@@ -119,13 +119,17 @@ export function CollaborativeWorkspace() {
           </div>
           
           <div className="mt-6">
-            <StandardPagination
+            <UnifiedPagination
               currentPage={currentPage}
               totalPages={totalPages}
               totalItems={totalItems}
               itemsPerPage={itemsPerPage}
               onPageChange={setCurrentPage}
               onItemsPerPageChange={setItemsPerPage}
+              size="md"
+              variant="default"
+              showItemsPerPage={true}
+              showInfo={true}
             />
           </div>
         </CardContent>

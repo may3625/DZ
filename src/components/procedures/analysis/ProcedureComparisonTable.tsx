@@ -6,7 +6,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Pagination } from '@/components/common/Pagination';
+import { UnifiedPagination } from '@/components/common/UnifiedPagination';
 import { usePagination } from '@/hooks/usePagination';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
@@ -253,7 +253,7 @@ export function ProcedureComparisonTable({
     setItemsPerPage
   } = usePagination({
     data: filteredProcedures,
-    itemsPerPage: 4
+    itemsPerPage: 5
   });
 
   const comparedProcedures = procedures.filter(p => selectedProcedures.includes(p.id));
@@ -436,13 +436,17 @@ export function ProcedureComparisonTable({
           {/* Pagination */}
           {totalPages > 1 && (
             <div className="mt-4">
-              <Pagination
+              <UnifiedPagination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 totalItems={totalItems}
                 itemsPerPage={itemsPerPage}
                 onPageChange={setCurrentPage}
                 onItemsPerPageChange={setItemsPerPage}
+                size="md"
+                variant="default"
+                showItemsPerPage={true}
+                showInfo={true}
               />
             </div>
           )}

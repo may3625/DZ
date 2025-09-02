@@ -6,7 +6,7 @@ import { StatisticsCards } from "./saved-searches/StatisticsCards";
 import { SavedSearchCard } from "./saved-searches/SavedSearchCard";
 import { EmptyState } from "./saved-searches/EmptyState";
 import { useAppStore } from '@/stores/appStore';
-import { Pagination } from '@/components/common/Pagination';
+import { UnifiedPagination } from '@/components/common/UnifiedPagination';
 import { usePagination } from '@/hooks/usePagination';
 import { InstantSearch } from '@/components/common/InstantSearch';
 
@@ -72,13 +72,17 @@ export function SavedSearchesEnhanced() {
       {/* Pagination */}
       {paginatedSearches.length > 0 && (
         <div className="mt-6">
-          <Pagination
+          <UnifiedPagination
             currentPage={currentPage}
             totalPages={totalPages}
             totalItems={totalItems}
             itemsPerPage={itemsPerPage}
             onPageChange={setCurrentPage}
             onItemsPerPageChange={setItemsPerPage}
+            size="md"
+            variant="default"
+            showItemsPerPage={true}
+            showInfo={true}
           />
         </div>
       )}

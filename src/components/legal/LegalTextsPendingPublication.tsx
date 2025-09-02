@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { SectionHeader } from "@/components/common/SectionHeader";
-import { Pagination } from "@/components/common/Pagination";
+import { UnifiedPagination } from '@/components/common/UnifiedPagination';
 import { usePagination } from "@/hooks/usePagination";
 import { useToast } from "@/hooks/use-toast";
 import { LanguageTranslationPanel } from "./LanguageTranslationPanel";
@@ -571,13 +571,17 @@ const LegalTextsPendingPublication: React.FC = () => {
           </div>
 
           {totalPages > 1 && (
-            <Pagination
+            <UnifiedPagination
               currentPage={currentPage}
               totalPages={totalPages}
               onPageChange={setCurrentPage}
               itemsPerPage={itemsPerPage}
               onItemsPerPageChange={setItemsPerPage}
               totalItems={totalItems}
+              size="md"
+              variant="default"
+              showItemsPerPage={true}
+              showInfo={true}
             />
           )}
         </div>

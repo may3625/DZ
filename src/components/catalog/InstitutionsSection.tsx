@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Pagination } from '@/components/common/Pagination';
+import { UnifiedPagination } from '@/components/common/UnifiedPagination';
 import { usePagination } from '@/hooks/usePagination';
 import { 
   Building2, 
@@ -272,13 +272,17 @@ export function InstitutionsSection() {
 
           {/* Pagination */}
           <div className="mt-6">
-            <Pagination
+            <UnifiedPagination
               currentPage={currentPage}
               totalPages={totalPages}
               totalItems={totalItems}
               itemsPerPage={itemsPerPage}
               onPageChange={setCurrentPage}
               onItemsPerPageChange={setItemsPerPage}
+              size="md"
+              variant="default"
+              showItemsPerPage={true}
+              showInfo={true}
             />
           </div>
 
