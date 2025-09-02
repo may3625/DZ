@@ -1,0 +1,28 @@
+{
+  "app": {
+    "title": "Dalil.dz - Plateforme Juridique Algérienne",
+    "description": "Plateforme algérienne de veille juridique et réglementaire avec support RTL"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "legal-catalog": "Catalogue juridique",
+    "procedures": "Procédures",
+    "analytics": "Analyses",
+    "collaboration": "Collaboration",
+    "resources": "Ressources",
+    "management": "Gestion",
+    "support": "Support"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "export": "Exporter",
+    "import": "Importer",
+    "settings": "Paramètres"
+  }
+}

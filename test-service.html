@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Service OCR</title>
+</head>
+<body>
+    <h1>Test Service OCR RÉEL</h1>
+    <button onclick="testService()">Tester le Service</button>
+    <div id="result"></div>
+
+    <script type="module">
+        async function testService() {
+            try {
+                console.log('🔍 Test du service...');
+                
+                // Importer le service
+                const { finalRealOCRService } = await import('./src/services/finalRealOCRService.ts');
+                console.log('✅ Service importé');
+                
+                // Appeler la méthode
+                const documents = await finalRealOCRService.getExtractedDocuments();
+                console.log('✅ Documents récupérés:', documents);
+                
+                // Afficher le résultat
+                document.getElementById('result').innerHTML = `
+                    <h2>Résultat du test:</h2>
+                    <p>Nombre de documents: ${documents.length}</p>
+                    <pre>${JSON.stringify(documents, null, 2)}</pre>
+                `;
+                
+            } catch (error) {
+                console.error('❌ Erreur:', error);
+                document.getElementById('result').innerHTML = `
+                    <h2>Erreur:</h2>
+                    <p style="color: red;">${error.message}</p>
+                `;
+            }
+        }
+        
+        // Exposer la fonction globalement
+        window.testService = testService;
+    </script>
+</body>
+</html>

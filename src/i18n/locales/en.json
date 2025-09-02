@@ -1,0 +1,28 @@
+{
+  "app": {
+    "title": "Dalil.dz - Algerian Legal Platform",
+    "description": "Algerian legal and regulatory monitoring platform with RTL support"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "legal-catalog": "Legal Catalog",
+    "procedures": "Procedures",
+    "analytics": "Analytics",
+    "collaboration": "Collaboration",
+    "resources": "Resources",
+    "management": "Management",
+    "support": "Support"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "settings": "Settings"
+  }
+}

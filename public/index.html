@@ -1,0 +1,106 @@
+
+<!doctype html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dalil.dz - Application algérienne de veille juridique et réglementaire. 100% locale, 100% indépendante. Plateforme d'analyse OCR pour les documents juridiques algériens." />
+    <meta name="keywords" content="algérie, droit algérien, juridique, ocr, veille réglementaire, lois algériennes, dalil, dz" />
+    <meta name="author" content="Équipe de développement algérienne" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Dalil.dz - Plateforme Algérienne de Veille Juridique" />
+    <meta property="og:description" content="Application 100% algérienne et locale pour l'analyse de documents juridiques avec OCR optimisé" />
+    <meta property="og:locale" content="fr_DZ" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dalil.dz - Application Algérienne Juridique" />
+    <meta name="twitter:description" content="Plateforme locale d'analyse juridique pour l'Algérie" />
+    
+    <!-- Langues supportées -->
+    <link rel="alternate" hreflang="fr-dz" href="/" />
+    <link rel="alternate" hreflang="ar-dz" href="/ar" />
+    
+    <title>Dalil.dz - Plateforme Algérienne de Veille Juridique</title>
+    
+    <!-- Fix critical Vite variables FIRST - COMPREHENSIVE SOLUTION -->
+    <script>
+      // Define critical Vite variables before any module loads
+      (function() {
+        'use strict';
+        
+        // Define all required globals immediately
+        window.__WS_TOKEN__ = '';
+        window.__DEFINES__ = {};
+        window.__TESSERACT_WORKER_PATH__ = '/tesseract-worker.js';
+        window.__TESSERACT_CORE_PATH__ = '/tesseract-core.wasm.js';
+        window.__TESSERACT_LANG_PATH__ = '/tesseract-lang';
+        
+        // Also define on globalThis for maximum coverage
+        if (typeof globalThis !== 'undefined') {
+          globalThis.__WS_TOKEN__ = '';
+          globalThis.__DEFINES__ = {};
+          globalThis.__TESSERACT_WORKER_PATH__ = '/tesseract-worker.js';
+          globalThis.__TESSERACT_CORE_PATH__ = '/tesseract-core.wasm.js';
+          globalThis.__TESSERACT_LANG_PATH__ = '/tesseract-lang';
+        }
+      
+      // Define import.meta polyfill if needed
+      if (typeof import === 'undefined') {
+        window.import = {};
+      }
+      if (typeof import !== 'undefined' && !import.meta) {
+        import.meta = {
+          env: {
+            DEV: true,
+            PROD: false,
+            SSR: false,
+            BASE_URL: '/',
+            MODE: 'development'
+          }
+        };
+      }
+      
+      // Define global and process for compatibility
+      window.global = window.global || window;
+      window.process = window.process || { env: { NODE_ENV: 'development' } };
+      
+      // Override Vite client to prevent token errors
+      window.__VITE_IS_MODERN__ = true;
+      window.__VITE_IS_LEGACY__ = false;
+      
+      // Intercept and prevent Vite client from loading
+      const originalCreateElement = document.createElement;
+      document.createElement = function(tagName) {
+        const element = originalCreateElement.call(this, tagName);
+        if (tagName.toLowerCase() === 'script') {
+          const originalSetter = element.__lookupSetter__('src') || 
+                                 Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src').set;
+          
+          Object.defineProperty(element, 'src', {
+            set: function(value) {
+              if (value && value.includes('@vite/client')) {
+                console.log('🚫 Blocked original Vite client, using custom client');
+                value = '/@vite/client.js'; // Use our custom client
+              }
+              originalSetter.call(this, value);
+            },
+            get: function() {
+              return element.getAttribute('src');
+            }
+          });
+        }
+        return element;
+      };
+      
+      console.log('✅ Comprehensive Vite variables and overrides defined');
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

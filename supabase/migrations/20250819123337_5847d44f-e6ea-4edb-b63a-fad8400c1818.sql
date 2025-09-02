@@ -1,0 +1,2 @@
+-- This migration regenerates types for the existing database schema
+-- No actual database changes needed, just triggering type generation

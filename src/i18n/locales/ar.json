@@ -1,0 +1,28 @@
+{
+  "app": {
+    "title": "دليل.دز - المنصة القانونية الجزائرية",
+    "description": "منصة جزائرية لمراقبة القوانين واللوائح مع دعم RTL"
+  },
+  "navigation": {
+    "dashboard": "لوحة القيادة",
+    "legal-catalog": "الكتالوج القانوني",
+    "procedures": "الإجراءات",
+    "analytics": "التحليلات",
+    "collaboration": "التعاون",
+    "resources": "الموارد",
+    "management": "الإدارة",
+    "support": "الدعم"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "search": "بحث",
+    "filter": "تصفية",
+    "export": "تصدير",
+    "import": "استيراد",
+    "settings": "الإعدادات"
+  }
+}

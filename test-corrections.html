@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test des Corrections - Dalil.dz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .test-section { background: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .warning { color: #ffc107; }
+        .info { color: #17a2b8; }
+        button { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin: 5px; }
+        button:hover { background: #0056b3; }
+        pre { background: #f8f9fa; padding: 15px; border-radius: 4px; overflow-x: auto; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .status.success { background: #d4edda; border: 1px solid #c3e6cb; }
+        .status.error { background: #f8d7da; border: 1px solid #f5c6cb; }
+        .status.warning { background: #fff3cd; border: 1px solid #ffeaa7; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test des Corrections des Erreurs de Navigateur</h1>
+    <p>Cette page teste toutes les corrections appliquées pour résoudre les erreurs de navigateur.</p>
+
+    <div class="test-section">
+        <h2>1. Test des Scripts de Correction</h2>
+        <button onclick="testScripts()">Tester les Scripts</button>
+        <div id="scripts-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Test des Fonctionnalités Non Reconnues</h2>
+        <button onclick="testUnrecognizedFeatures()">Tester les Fonctionnalités</button>
+        <div id="features-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Test des APIs Problématiques</h2>
+        <button onclick="testProblematicAPIs()">Tester les APIs</button>
+        <div id="apis-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Test de la Configuration CSP</h2>
+        <button onclick="testCSP()">Tester la CSP</button>
+        <div id="csp-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. Test des Cookies et Permissions</h2>
+        <button onclick="testCookiesAndPermissions()">Tester Cookies & Permissions</button>
+        <div id="cookies-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>6. Test Complet</h2>
+        <button onclick="runAllTests()">Lancer Tous les Tests</button>
+        <div id="complete-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>7. Diagnostic Complet</h2>
+        <button onclick="runDiagnostics()">Lancer le Diagnostic</button>
+        <div id="diagnostic-result"></div>
+    </div>
+
+    <script>
+        // Attendre que tous les scripts soient chargés
+        window.addEventListener('load', function() {
+            console.log('🚀 Page de test chargée - Prêt pour les tests');
+        });
+
+        function testScripts() {
+            const status = document.getElementById('scripts-status');
+            let results = [];
+            
+            // Test des scripts de correction
+            if (window.__VITE_STATIC_CLIENT__) {
+                results.push('✅ Client Vite statique chargé');
+            } else {
+                results.push('❌ Client Vite statique non chargé');
+            }
+
+            if (window.__BROWSER_ERRORS_FIXED__) {
+                results.push('✅ Erreurs de navigateur corrigées');
+            } else {
+                results.push('❌ Erreurs de navigateur non corrigées');
+            }
+
+            if (window.__CSP_CONFIGURED__) {
+                results.push('✅ CSP configurée');
+            } else {
+                results.push('❌ CSP non configurée');
+            }
+
+            if (window.__FEATURE_POLICY_CONFIGURED__) {
+                results.push('✅ Politique de fonctionnalités configurée');
+            } else {
+                results.push('❌ Politique de fonctionnalités non configurée');
+            }
+
+            const successCount = results.filter(r => r.includes('✅')).length;
+            const totalCount = results.length;
+            
+            status.innerHTML = `
+                <div class="status ${successCount === totalCount ? 'success' : 'warning'}">
+                    <strong>Résultats:</strong> ${successCount}/${totalCount} tests réussis
+                </div>
+                <pre>${results.join('\n')}</pre>
+            `;
+        }
+
+        function testUnrecognizedFeatures() {
+            const status = document.getElementById('features-status');
+            let results = [];
+            
+            // Test VR
+            try {
+                if (navigator.getVRDisplays) {
+                    const vrTest = navigator.getVRDisplays();
+                    if (vrTest.then) {
+                        results.push('✅ API VR disponible (polyfill)');
+                    } else {
+                        results.push('⚠️ API VR disponible mais pas de polyfill');
+                    }
+                } else {
+                    results.push('❌ API VR non disponible');
+                }
+            } catch (e) {
+                results.push('✅ API VR gérée par la politique de fonctionnalités');
+            }
+
+            // Test AmbientLightSensor
+            try {
+                if (window.AmbientLightSensor) {
+                    new window.AmbientLightSensor();
+                    results.push('❌ AmbientLightSensor accessible (devrait être bloqué)');
+                } else {
+                    results.push('✅ AmbientLightSensor bloqué');
+                }
+            } catch (e) {
+                results.push('✅ AmbientLightSensor correctement bloqué');
+            }
+
+            // Test Battery
+            try {
+                if (navigator.getBattery) {
+                    const batteryTest = navigator.getBattery();
+                    if (batteryTest.then) {
+                        results.push('✅ API Batterie disponible (polyfill)');
+                    } else {
+                        results.push('⚠️ API Batterie disponible mais pas de polyfill');
+                    }
+                } else {
+                    results.push('❌ API Batterie non disponible');
+                }
+            } catch (e) {
+                results.push('✅ API Batterie gérée par la politique de fonctionnalités');
+            }
+
+            const successCount = results.filter(r => r.includes('✅')).length;
+            const totalCount = results.length;
+            
+            status.innerHTML = `
+                <div class="status ${successCount === totalCount ? 'success' : 'warning'}">
+                    <strong>Résultats:</strong> ${successCount}/${totalCount} tests réussis
+                </div>
+                <pre>${results.join('\n')}</pre>
+            `;
+        }
+
+        function testProblematicAPIs() {
+            const status = document.getElementById('apis-status');
+            let results = [];
+            
+            // Test des capteurs de mouvement
+            const motionSensors = ['Accelerometer', 'Gyroscope', 'Magnetometer'];
+            motionSensors.forEach(sensorName => {
+                try {
+                    if (window[sensorName]) {
+                        new window[sensorName]();
+                        results.push(`❌ ${sensorName} accessible (devrait être bloqué)`);
+                    } else {
+                        results.push(`✅ ${sensorName} bloqué`);
+                    }
+                } catch (e) {
+                    results.push(`✅ ${sensorName} correctement bloqué`);
+                }
+            });
+
+            // Test des permissions
+            if (navigator.permissions) {
+                results.push('✅ API Permissions disponible');
+            } else {
+                results.push('⚠️ API Permissions non supportée');
+            }
+
+            const successCount = results.filter(r => r.includes('✅')).length;
+            const totalCount = results.length;
+            
+            status.innerHTML = `
+                <div class="status ${successCount === totalCount ? 'success' : 'warning'}">
+                    <strong>Résultats:</strong> ${successCount}/${totalCount} tests réussis
+                </div>
+                <pre>${results.join('\n')}</pre>
+            `;
+        }
+
+        function testCSP() {
+            const status = document.getElementById('csp-status');
+            let results = [];
+            
+            // Vérifier la meta CSP
+            const cspMeta = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+            if (cspMeta) {
+                results.push('✅ Meta CSP présente');
+                results.push(`📋 Contenu: ${cspMeta.content.substring(0, 100)}...`);
+            } else {
+                results.push('❌ Meta CSP manquante');
+            }
+
+            // Vérifier la meta Feature Policy
+            const fpMeta = document.querySelector('meta[http-equiv="Feature-Policy"]');
+            if (fpMeta) {
+                results.push('✅ Meta Feature Policy présente');
+                results.push(`📋 Contenu: ${fpMeta.content.substring(0, 100)}...`);
+            } else {
+                results.push('❌ Meta Feature Policy manquante');
+            }
+
+            // Test des fonctions de diagnostic
+            if (typeof window.diagnoseCSP === 'function') {
+                results.push('✅ Fonction diagnoseCSP disponible');
+            } else {
+                results.push('❌ Fonction diagnoseCSP manquante');
+            }
+
+            if (typeof window.diagnoseFeaturePolicy === 'function') {
+                results.push('✅ Fonction diagnoseFeaturePolicy disponible');
+            } else {
+                results.push('❌ Fonction diagnoseFeaturePolicy manquante');
+            }
+
+            const successCount = results.filter(r => r.includes('✅')).length;
+            const totalCount = results.length;
+            
+            status.innerHTML = `
+                <div class="status ${successCount === totalCount ? 'success' : 'warning'}">
+                    <strong>Résultats:</strong> ${successCount}/${totalCount} tests réussis
+                </div>
+                <pre>${results.join('\n')}</pre>
+            `;
+        }
+
+        function testCookiesAndPermissions() {
+            const status = document.getElementById('cookies-status');
+            let results = [];
+            
+            // Test des cookies
+            try {
+                const testCookie = `test_${Date.now()}=1`;
+                document.cookie = testCookie;
+                
+                if (document.cookie.includes(testCookie)) {
+                    results.push('✅ Cookies fonctionnels');
+                    // Nettoyer le cookie de test
+                    document.cookie = `${testCookie}; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+                } else {
+                    results.push('⚠️ Cookies désactivés ou bloqués');
+                }
+            } catch (e) {
+                results.push('❌ Erreur lors du test des cookies');
+            }
+
+            // Test des permissions
+            if (navigator.permissions) {
+                results.push('✅ API Permissions disponible');
+                
+                // Test des permissions spécifiques
+                const testPermissions = ['camera', 'microphone', 'geolocation'];
+                testPermissions.forEach(permission => {
+                    try {
+                        navigator.permissions.query({ name: permission }).then(result => {
+                            results.push(`ℹ️ Permission ${permission}: ${result.state}`);
+                        }).catch(() => {
+                            results.push(`ℹ️ Permission ${permission} non supportée`);
+                        });
+                    } catch (e) {
+                        results.push(`⚠️ Erreur test permission ${permission}`);
+                    }
+                });
+            } else {
+                results.push('⚠️ API Permissions non disponible');
+            }
+
+            const successCount = results.filter(r => r.includes('✅')).length;
+            const totalCount = results.length;
+            
+            status.innerHTML = `
+                <div class="status ${successCount === totalCount ? 'success' : 'warning'}">
+                    <strong>Résultats:</strong> ${successCount}/${totalCount} tests réussis
+                </div>
+                <pre>${results.join('\n')}</pre>
+            `;
+        }
+
+        function runAllTests() {
+            const status = document.getElementById('complete-status');
+            status.innerHTML = '<div class="status info">🔄 Lancement de tous les tests...</div>';
+            
+            setTimeout(() => {
+                testScripts();
+                testUnrecognizedFeatures();
+                testProblematicAPIs();
+                testCSP();
+                testCookiesAndPermissions();
+                
+                status.innerHTML = '<div class="status success">✅ Tous les tests ont été lancés. Vérifiez les résultats ci-dessus.</div>';
+            }, 100);
+        }
+
+        function runDiagnostics() {
+            const status = document.getElementById('diagnostic-result');
+            status.innerHTML = '<div class="status info">🔍 Lancement du diagnostic complet...</div>';
+            
+            let diagnosticResults = [];
+            
+            // Diagnostic CSP
+            if (typeof window.diagnoseCSP === 'function') {
+                try {
+                    window.diagnoseCSP();
+                    diagnosticResults.push('✅ Diagnostic CSP exécuté');
+                } catch (e) {
+                    diagnosticResults.push(`❌ Erreur diagnostic CSP: ${e.message}`);
+                }
+            } else {
+                diagnosticResults.push('❌ Fonction diagnoseCSP non disponible');
+            }
+
+            // Diagnostic Feature Policy
+            if (typeof window.diagnoseFeaturePolicy === 'function') {
+                try {
+                    window.diagnoseFeaturePolicy();
+                    diagnosticResults.push('✅ Diagnostic Feature Policy exécuté');
+                } catch (e) {
+                    diagnosticResults.push(`❌ Erreur diagnostic Feature Policy: ${e.message}`);
+                }
+            } else {
+                diagnosticResults.push('❌ Fonction diagnoseFeaturePolicy non disponible');
+            }
+
+            // État global
+            diagnosticResults.push('📊 État global:');
+            diagnosticResults.push(`  - Client Vite: ${window.__VITE_STATIC_CLIENT__ || 'Non configuré'}`);
+            diagnosticResults.push(`  - Erreurs corrigées: ${window.__BROWSER_ERRORS_FIXED__ || 'Non configuré'}`);
+            diagnosticResults.push(`  - CSP: ${window.__CSP_CONFIGURED__ || 'Non configuré'}`);
+            diagnosticResults.push(`  - Feature Policy: ${window.__FEATURE_POLICY_CONFIGURED__ || 'Non configuré'}`);
+
+            status.innerHTML = `
+                <div class="status success">✅ Diagnostic terminé</div>
+                <pre>${diagnosticResults.join('\n')}</pre>
+                <p><strong>💡 Vérifiez la console du navigateur pour plus de détails.</strong></p>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# Fichiers volumineux à ignorer
+*.wasm
+*.traineddata
+*.geo.json
+!algeria-wilayas-simplified.geo.json
+
+# Fichiers temporaires
+*.tmp
+*.log
+*.cache
+
+# Fichiers de développement
+vite-client-override.js
+
+# Fichiers de test
+test-*.js
+
+# Fichiers non compressés (garder seulement .gz)
+tesseract-core.wasm
+tesseract-core.wasm.js
+tesseract-worker.js
+*.traineddata
+!*.traineddata.gz
+
+# Exceptions: garder ces ressources Tesseract locales en dépôt
+!tesseract-lang/fra.traineddata
+!tesseract-lang/ara.traineddata
+!tesseract-core.wasm
+!tesseract-core.wasm.js
+!tesseract-worker.js
+
+# Dossiers volumineux
+node_modules/
+dist/
+build/
+.cache/
